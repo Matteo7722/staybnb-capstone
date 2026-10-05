@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import multer from 'multer';
+import { getAccommodations, getAccommodation, createAccommodation, updateAccommodation, deleteAccommodation } from '../controllers/accommodationController.js';
+import { protect, hostOnly } from '../middleware/auth.js';
+const router = Router();
+const upload = multer({ dest: 'uploads/' });
+router.get('/', getAccommodations);
+router.get('/:id', getAccommodation);
+router.post('/', protect, hostOnly, upload.array('images', 8), createAccommodation);
+router.put('/:id', protect, hostOnly, upload.array('images', 8), updateAccommodation);
+router.delete('/:id', protect, hostOnly, deleteAccommodation);
+export default router;
