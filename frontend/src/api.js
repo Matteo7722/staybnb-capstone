@@ -1,7 +1,6 @@
 export const API =
-  import.meta.env.PROD
-    ? '/api'
-    : 'http://localhost:5000/api';
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:5000/api';
 
 export async function apiRequest(path, options = {}) {
   const token = localStorage.getItem('staybnb_token');
